@@ -9,7 +9,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 
-
+from pages.brand_page import Brand_page
 from pages.main_page import Main_page
 
 def test_buy_product(set_group):
@@ -21,4 +21,10 @@ def test_buy_product(set_group):
     driver = webdriver.Chrome(service=s, options=options)
 
     mp = Main_page(driver)
+    time.sleep(2)
     mp.select_brand_element()
+
+    bp = Brand_page(driver)
+    time.sleep(3)
+    bp.select_cats()
+    time.sleep(15)

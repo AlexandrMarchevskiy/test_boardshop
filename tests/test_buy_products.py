@@ -25,6 +25,8 @@ def test_buy_product(set_group):
     mp.select_brand_element()
 
     bp = Brand_page(driver)
-    time.sleep(3)
+    time.sleep(2)
     bp.select_cats()
-    time.sleep(15)
+    time.sleep(2)
+    bp.select_products()
+    time.sleep(2)

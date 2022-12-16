@@ -1,3 +1,6 @@
+import time
+
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -14,7 +17,7 @@ class Main_page(Base):
         self.driver = driver
 
     # Locators
-    select_brand = '/html/body/div[1]/main/div/div[4]/div/div/a[4]'
+    select_brand = "//img[@alt='Element']"
 
     # Getters
 
@@ -23,12 +26,16 @@ class Main_page(Base):
 
     #Actions
     def click_select_brand(self):
+        action = ActionChains(self.driver)
+        action.move_to_element(self.get_select_brand())
         self.get_select_brand().click()
 
     # Methods
     def select_brand_element(self):
         self.driver.get(self.url)
         self.driver.maximize_window()
+        self.driver.execute_script("window.scrollTo(0, 200)")
+        time.sleep(2)
         self.click_select_brand()
         self.get_current_url()
         self.assert_url('https://www.brd.ru/brand/element')

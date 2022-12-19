@@ -19,13 +19,13 @@ class Brand_page(Base):
     male_box = '//*[@id="mCSB_1_container"]/label[1]'
     shoes = '//*[@id="mCSB_2_container"]/label[4]'
     jeans = '//*[@id="mCSB_2_container"]/label[18]'
-    hoodies = '//*[@id="mCSB_2_container"]/label[54]'
+    hoodies = '//*[@id="mCSB_2_container"]/label[51]'
 
     # Locators products
 
-    jeans_element_E02 = '/html/body/div[1]/main/div[3]/div/div[2]/div[1]/div[1]/div/a'
+    jeans_element_E02 = '//a[@href="/product/z1pnb1-elf1-504-muzhskie-zauzhennye-dzhinsy-element-e02"]'
     shoes_topaz_C3 = '//a[@href="/product/z6tm31-01a-339-muzhskie-kozhanye-botinki-topaz-c3"]'
-    hoodi_element_92 = '/html/body/div[1]/main/div[3]/div/div[2]/div[9]/div[1]/div/a'
+    hoodie_element = '//a[@href="/product/w1hob1-elp1-967-muzhskoe-hudi-element-forces"]'
 
 
     # Locators in products
@@ -34,11 +34,16 @@ class Brand_page(Base):
 
     shoes_size_42 = '//*[@id="add_product-form"]/div/label[6]'
 
+
+    hoodie_size = '//*[@id="add_product-form"]/div/label[3]'
+
     # Optional locators
 
     scrollbar_cats = '//*[@id="mCSB_2_dragger_vertical"]'
 
     close_msg = '/html/body/div[8]/div/div[3]/label'
+
+    enter_to_cart = '/html/body/div[8]/div/div[3]/a'
 
 
 
@@ -65,7 +70,7 @@ class Brand_page(Base):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.shoes_topaz_C3)))
 
     def get_hoodie_product(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.hoodi_element_92)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.hoodie_element)))
 
     # Getters options
 
@@ -76,6 +81,9 @@ class Brand_page(Base):
     def get_close_message(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.close_msg)))
 
+    def get_enter_to_cart(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.enter_to_cart)))
+
 
     def get_jeans_size(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.jeans_size_32_32)))
@@ -85,6 +93,9 @@ class Brand_page(Base):
 
     def get_shoes_size(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.shoes_size_42)))
+
+    def get_hoodie_size(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.hoodie_size)))
 
 
     #Actions cats
@@ -123,7 +134,8 @@ class Brand_page(Base):
         time.sleep(3)
 
     def select_shoes(self):
-        self.driver.execute_script("window.scrollTo(0, 1700)")
+        action = ActionChains(self.driver)
+        action.move_to_element(self.get_shoes_product()).perform()
         self.get_shoes_product().click()
         self.assert_url('https://www.brd.ru/product/z6tm31-01a-339-muzhskie-kozhanye-botinki-topaz-c3')
         self.get_shoes_size().click()
@@ -131,6 +143,20 @@ class Brand_page(Base):
         self.get_close_message().click()
         self.driver.back()
         print('shoes selected!')
+
+    def select_hoodie(self):
+        action = ActionChains(self.driver)
+        action.move_to_element(self.get_hoodie_product()).perform()
+        # self.driver.execute_script("window.scrollTo(0, 1700)")
+        self.get_hoodie_product().click()
+        self.assert_url('https://www.brd.ru/product/w1hob1-elp1-967-muzhskoe-hudi-element-forces')
+        self.get_hoodie_size().click()
+        self.get_product_add_cart().click()
+        print('hoodie selected!')
+        self.get_enter_to_cart().click()
+        print('enter to cart!')
+
+
 
 
     # Methods
@@ -146,3 +172,4 @@ class Brand_page(Base):
     def select_products(self):
         self.select_jeans()
         self.select_shoes()
+        self.select_hoodie()

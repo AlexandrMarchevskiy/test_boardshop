@@ -14,7 +14,6 @@ class Brand_page(Base):
         super().__init__(driver)
         self.driver = driver
 
-
     # Locators cats
     male_box = '//*[@id="mCSB_1_container"]/label[1]'
     shoes = '//*[@id="mCSB_2_container"]/label[4]'
@@ -173,3 +172,5 @@ class Brand_page(Base):
         self.select_jeans()
         self.select_shoes()
         self.select_hoodie()
+        time.sleep(5)
+        self.assert_url('https://www.brd.ru/shopping_cart.php')

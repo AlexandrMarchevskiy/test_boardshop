@@ -34,7 +34,6 @@ class Main_page(Base):
     def select_brand_element(self):
         self.driver.get(self.url)
         self.driver.maximize_window()
-        self.driver.execute_script("window.scrollTo(0, 200)")
         time.sleep(2)
         self.click_select_brand()
         self.get_current_url()

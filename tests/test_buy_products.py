@@ -10,6 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 
 from pages.brand_page import Brand_page
+from pages.cart_page import Cart_page
 from pages.main_page import Main_page
 
 def test_buy_product(set_group):
@@ -30,3 +31,6 @@ def test_buy_product(set_group):
     time.sleep(2)
     bp.select_products()
     time.sleep(2)
+
+    cp = Cart_page(driver)
+    cp.info_cart()

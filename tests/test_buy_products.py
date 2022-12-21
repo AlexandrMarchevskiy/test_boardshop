@@ -2,18 +2,14 @@ import time
 
 import pytest
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service
 
 from pages.brand_page import Brand_page
 from pages.cart_page import Cart_page
 from pages.main_page import Main_page
 
-def test_buy_product(set_group):
+@pytest.mark.parametrize('execution_number', range(1, 6))
+def test_buy_product(set_group, execution_number):
     options = webdriver.ChromeOptions()
     options.add_argument('log-level=3')   # отключение предупреждения ошибки рукопожатия
 

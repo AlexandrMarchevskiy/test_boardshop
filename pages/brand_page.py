@@ -18,7 +18,7 @@ class Brand_page(Base):
     male_box = '//*[@id="mCSB_1_container"]/label[1]'
     shoes = '//*[@id="mCSB_2_container"]/label[4]'
     jeans = '//*[@id="mCSB_2_container"]/label[18]'
-    hoodies = '//*[@id="mCSB_2_container"]/label[51]'
+    hoodies = '//*[@id="mCSB_2_container"]/label[50]'
 
     # Locators products
 
@@ -43,6 +43,8 @@ class Brand_page(Base):
     close_msg = '/html/body/div[8]/div/div[3]/label'
 
     enter_to_cart = '/html/body/div[8]/div/div[3]/a'
+
+    cart_brand_page = '//a[@href="/shopping_cart.php"]'
 
 
 
@@ -96,6 +98,9 @@ class Brand_page(Base):
     def get_hoodie_size(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.hoodie_size)))
 
+    def get_cart_from_brand_page(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.cart_brand_page)))
+
 
     #Actions cats
 
@@ -103,57 +108,81 @@ class Brand_page(Base):
         action = ActionChains(self.driver)
         action.move_to_element(self.get_scrollbar_cats())
         self.get_male_box().click()
+        self.get_screen_shot('male_box')
 
     def click_shoes(self):
         self.get_shoes().click()
         print('shoes cat selected')
+        self.get_screen_shot('shoes_cat')
 
     def click_jeans(self):
         action = ActionChains(self.driver)
         action.click_and_hold(self.get_scrollbar_cats()).move_by_offset(0, 45).release().perform()
         self.get_jeans().click()
         print('jeans cat selected')
+        self.get_screen_shot('jeans_box')
 
     def click_hoodies(self):
         action = ActionChains(self.driver)
         action.click_and_hold(self.get_scrollbar_cats()).move_by_offset(0, 80).release().perform()
         self.get_hoodies().click()
         print('hoodies cat selected')
+        self.get_screen_shot('hoodies_box')
 
     # Actions products
 
     def select_jeans(self):
-        self.get_jeans_product().click()
-        self.assert_url('https://www.brd.ru/product/z1pnb1-elf1-504-muzhskie-zauzhennye-dzhinsy-element-e02')
-        self.get_jeans_size().click()
-        self.get_product_add_cart().click()
-        self.get_close_message().click()
-        self.driver.back()
-        print('jeans selected!')
+        try:
+            self.get_jeans_product().click()
+            self.assert_url('https://www.brd.ru/product/z1pnb1-elf1-504-muzhskie-zauzhennye-dzhinsy-element-e02')
+            self.get_jeans_size().click()
+            self.get_product_add_cart().click()
+            self.get_close_message().click()
+            self.get_screen_shot('select_jeans')
+            self.driver.back()
+            print('jeans selected!')
+        except:
+            print('Не удалось выбрать джинсы!')
+            self.get_screen_shot('NOT_select_jeans')
         time.sleep(3)
 
     def select_shoes(self):
-        action = ActionChains(self.driver)
-        action.move_to_element(self.get_shoes_product()).perform()
-        self.get_shoes_product().click()
-        self.assert_url('https://www.brd.ru/product/z6tm31-01a-339-muzhskie-kozhanye-botinki-topaz-c3')
-        self.get_shoes_size().click()
-        self.get_product_add_cart().click()
-        self.get_close_message().click()
-        self.driver.back()
-        print('shoes selected!')
+        try:
+            action = ActionChains(self.driver)
+            action.move_to_element(self.get_shoes_product()).perform()
+            self.get_shoes_product().click()
+            self.assert_url('https://www.brd.ru/product/z6tm31-01a-339-muzhskie-kozhanye-botinki-topaz-c3')
+            self.get_shoes_size().click()
+            self.get_product_add_cart().click()
+            self.get_close_message().click()
+            self.get_screen_shot('select_shoes')
+            self.driver.back()
+            print('shoes selected!')
+        except:
+            self.get_screen_shot('NOT_select_shoes')
+            print('Не удалось выбрать обувь!')
 
     def select_hoodie(self):
-        action = ActionChains(self.driver)
-        action.move_to_element(self.get_hoodie_product()).perform()
-        # self.driver.execute_script("window.scrollTo(0, 1700)")
-        self.get_hoodie_product().click()
-        self.assert_url('https://www.brd.ru/product/w1hob1-elp1-967-muzhskoe-hudi-element-forces')
-        self.get_hoodie_size().click()
-        self.get_product_add_cart().click()
-        print('hoodie selected!')
-        self.get_enter_to_cart().click()
-        print('enter to cart!')
+        try:
+            action = ActionChains(self.driver)
+            action.move_to_element(self.get_hoodie_product()).perform()
+            self.get_hoodie_product().click()
+            self.assert_url('https://www.brd.ru/product/w1hob1-elp1-967-muzhskoe-hudi-element-forces')
+            self.get_hoodie_size().click()
+            self.get_product_add_cart().click()
+            print('hoodie selected!')
+            self.get_screen_shot('select_hoodie')
+            self.get_enter_to_cart().click()
+            print('Вход в корзину')
+        except:
+            print('Не удалось выбрать худи!!')
+            self.get_screen_shot('NOT_select_hoodie')
+            self.get_cart_from_brand_page().click()
+            print('Вход в корзину')
+        finally:
+            self.get_current_url()
+
+
 
 
 

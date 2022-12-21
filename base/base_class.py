@@ -1,5 +1,4 @@
 import datetime
-import time
 
 
 class Base():
@@ -19,9 +18,9 @@ class Base():
 
     # screenshot
 
-    def get_screen_shot(self):
-        now_date = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S')
-        name_screenshot = 'screenshot' + now_date + '.png'
+    def get_screen_shot(self, step):
+        now_date = datetime.datetime.utcnow().strftime('%d.%m - %H.%M.%S')
+        name_screenshot = 'screenshot-' +  step +  now_date + '.png'
         self.driver.save_screenshot('D:\\test_shop_project\\screen\\' + name_screenshot)
 
     # assert url

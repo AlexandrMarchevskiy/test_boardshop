@@ -38,3 +38,4 @@ class Main_page(Base):
         self.click_select_brand()
         self.get_current_url()
         self.assert_url('https://www.brd.ru/brand/element')
+        self.get_screen_shot('brand_element')

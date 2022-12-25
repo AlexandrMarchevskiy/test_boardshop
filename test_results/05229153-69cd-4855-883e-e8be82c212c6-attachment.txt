@@ -1,0 +1,15 @@
+Enter system
+current url https://www.brd.ru/brand/element
+ok value url
+shoes cat selected
+jeans cat selected
+hoodies cat selected
+ok value url
+jeans selected!
+ok value url
+shoes selected!
+ok value url
+hoodie selected!
+Вход в корзину
+current url https://www.brd.ru/shopping_cart.php
+ok value url

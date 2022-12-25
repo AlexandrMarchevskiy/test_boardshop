@@ -1,0 +1,39 @@
+
+-----
+Test: tests/test_buy_products.py::test_buy_product (call)
+Start time: 2022-12-25_22-22
+Start name method: select_brand_element
+
+End time: 2022-12-25_22-22
+End name method: select_brand_element
+URL: https://www.brd.ru/brand/element
+
+-----
+
+-----
+Test: tests/test_buy_products.py::test_buy_product (call)
+Start time: 2022-12-25_22-22
+Start name method: Select cats
+
+End time: 2022-12-25_22-22
+End name method: Select cats
+URL: https://www.brd.ru/brand/element?fgender=2&fcategory=191%2C181%2C865
+
+-----
+
+-----
+Test: tests/test_buy_products.py::test_buy_product (call)
+Start time: 2022-12-25_22-22
+Start name method: select_products
+
+End time: 2022-12-25_22-23
+End name method: select_products
+URL: https://www.brd.ru/shopping_cart.php
+
+-----
+
+-----
+Test: tests/test_buy_products.py::test_buy_product (call)
+Start time: 2022-12-25_22-23
+Start name method: cart_check
+
